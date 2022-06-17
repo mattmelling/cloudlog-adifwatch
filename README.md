@@ -4,6 +4,11 @@ This tool watches an [ADIF](https://adif.org/) log file for changes using the na
 notification mechanism and uploads it to a [Cloudlog](https://www.magicbug.co.uk/cloudlog/)
 instance through the [QSO API](https://github.com/magicbug/Cloudlog/wiki/API#apiqso).
 
+## Fork
+
+This fork packages cloudlog-adifwatch as a [Nix Flake](https://nixos.wiki/wiki/Flakes), providing a [NixOS](https://nixos.org) module
+and package for easy integration in to your NixOS configuration.
+
 ## Usage
 
 On Linux systems the recommended way to use this tool is through the provided systemd unit. It
