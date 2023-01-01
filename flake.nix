@@ -15,14 +15,17 @@
         cargo
       ];
     };
-    packages.x86_64-linux.cloudlog-adifwatch = let
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
-    in pkgs.rustPlatform.buildRustPackage {
-      pname = "cloudlog-adifwatch";
-      version = "0.0.14";
-      src = ./.;
-      cargoSha256 = "sha256-F9zRjEQeDsOvt3rofJeX5Np5UNdsalMujjEJGpD/ZYI=";
-      RUSTC_BOOTSTRAP = 1;
+    packages.x86_64-linux = {
+      default = self.packages.x86_64-linux.cloudlog-adifwatch;
+      cloudlog-adifwatch = let
+        pkgs = import nixpkgs { system = "x86_64-linux"; };
+      in pkgs.rustPlatform.buildRustPackage {
+        pname = "cloudlog-adifwatch";
+        version = "0.0.14";
+        src = ./.;
+        cargoSha256 = "sha256-Jjuw1AbbGSf/NrhGqTFJDrNJ8nemAwDhg48v8GFKnv8=";
+        RUSTC_BOOTSTRAP = 1;
+      };
     };
     checks.x86_64-linux.cloudlog-adifwatch = let
       test = import (nixpkgs + "/nixos/lib/testing-python.nix") {
