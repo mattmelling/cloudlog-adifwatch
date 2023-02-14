@@ -5,14 +5,19 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
+    rust-overlay.url = "github:oxalica/rust-overlay";
   };
-  outputs = { self, nixpkgs, ... }: {
+  outputs = { self, nixpkgs, rust-overlay, ... }: {
     devShells.x86_64-linux.default = let
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        overlays = [
+          (import rust-overlay)
+        ];
+      };
     in pkgs.mkShell {
       buildInputs = with pkgs; [
-        rustc
-        cargo
+        rust-bin.nightly.latest.default
       ];
     };
     packages.x86_64-linux = {
@@ -21,9 +26,9 @@
         pkgs = import nixpkgs { system = "x86_64-linux"; };
       in pkgs.rustPlatform.buildRustPackage {
         pname = "cloudlog-adifwatch";
-        version = "0.0.14";
+        version = "0.0.17";
         src = ./.;
-        cargoSha256 = "sha256-Jjuw1AbbGSf/NrhGqTFJDrNJ8nemAwDhg48v8GFKnv8=";
+        cargoSha256 = "sha256-sVPDNvry0q5FSA1FiK49G3GBoVAr2phayDRsNfkyIFw=";
         RUSTC_BOOTSTRAP = 1;
       };
     };
