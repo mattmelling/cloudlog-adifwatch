@@ -73,7 +73,10 @@
             description = "cloudlog-adifwatch ${name}";
             enable = true;
             wantedBy = [ "multi-user.target" ];
-            after = [ "network.target" ];
+            after = [
+              "network.target"
+              "phpfpm-cloudlog.service"
+            ];
             serviceConfig = {
               ExecStart = "${pkgs.cloudlog-adifwatch}/bin/cloudlog-adifwatch ${cfg.host} ${cfg.key} ${toString cfg.station_id} ${path}";
             };
