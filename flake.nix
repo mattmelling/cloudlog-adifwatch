@@ -26,9 +26,9 @@
         pkgs = import nixpkgs { system = "x86_64-linux"; };
       in pkgs.rustPlatform.buildRustPackage {
         pname = "cloudlog-adifwatch";
-        version = "0.0.17";
+        version = "0.0.18";
         src = ./.;
-        cargoSha256 = "sha256-sVPDNvry0q5FSA1FiK49G3GBoVAr2phayDRsNfkyIFw=";
+        cargoHash = "sha256-3uXW3NrkqEO8RrXeNMpC6wvykX4iFFvAZqxziGwV/3c=";
         RUSTC_BOOTSTRAP = 1;
       };
     };
